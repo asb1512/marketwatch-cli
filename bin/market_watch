@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/market_watch'
+
+CLI.new.call
