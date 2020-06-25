@@ -4,7 +4,7 @@ require_relative "./display.rb"
 # CLI Controller
 class CLI
 
-    def call
+    def welcome
         puts "\n"
         puts "Welcome to Market Watch!"
         puts "----------------------------------------------"

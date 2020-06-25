@@ -43,13 +43,12 @@ class Display
         elsif date_input == "yesterday"
             puts "\n"
             # puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_YESTERDAY]
-            binding.pry
-            display_data(AlphaVantage::DATE_YESTERDAY)
+            display_data(self.alpha.yesterday)
         elsif date_input == "main"
             list_display_options
         elsif date_input == "" || date_input == " "
             puts "Invalid Date. Please start over."
-            display_daily
+            display_daily(self.alpha.yesterday)
         elsif date_input == "exit"
         else
             puts "\n"
@@ -60,15 +59,18 @@ class Display
 
     def display_data(date)
         # Makes API call with correct function type and date based upon user input.
-        run = self.alpha.params[self.alpha.function][date]
-
+        # run = self.alpha.params[self.alpha.function][date]
+        run = self.alpha.params[self.alpha.function.gsub("function=","")]
+        binding.pry
         puts <<-DOC
+            |#{self.alpha.symbol.gsub('=', ' = ')}
             |   OPEN: $#{run["1. open"]}
             |   HIGH: $#{run["2. high"]}
             |    LOW: $#{run["3. low"]}
             |  CLOSE: $#{run["4. close"]}
             | VOLUME: $#{run["5. volume"]}
         DOC
+        
     end
 
 end

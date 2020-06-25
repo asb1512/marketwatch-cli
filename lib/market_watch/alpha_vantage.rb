@@ -6,16 +6,16 @@ require 'pry'
 # Responsible for making calls to API.
 class AlphaVantage
 
-    attr_reader :api_key, :date_today, :date_yesterday, :desired_date
+    attr_reader :key, :today, :yesterday, :desired_date
 
 # API Key: W950UXLR0AH9JKAL
 # This will be specific to the user.
 # API_KEY = "apikey=W950UXLR0AH9JKAL"
 
 def initialize
-    @api_key = "apikey=W950UXLR0AH9JKAL"
-    @date_today = Date.today.strftime
-    @date_yesterday = Date.today.prev_day.strftime
+    @key = "apikey=W950UXLR0AH9JKAL"
+    @today = Date.today.strftime
+    @yesterday = Date.today.prev_day.strftime
 end
 
 # This returns today's date as: YYYY-MM-DD
@@ -32,7 +32,7 @@ DATE_YESTERDAY = Date.today.prev_day.strftime
     # Defines parameters necessary to request data types.
     def params
         # self.class.get('function=TIME_SERIES_DAILY&symbol=DOCU&apikey=W950UXLR0AH9JKAL')
-        self.class.get("#{@function}&#{@symbol}&#{API_KEY}")
+        self.class.get("#{@function}&#{@symbol}&#{self.key}")
     end
 
     # Sets the correct instance variable values for the correct API call formatting. 

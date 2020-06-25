@@ -2,4 +2,4 @@
 
 require './lib/market_watch'
 
-CLI.new.call
+CLI.new.welcome
