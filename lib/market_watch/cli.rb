@@ -25,7 +25,7 @@ class CLI
             3. Daily Adjusted
             -----------------
         DOC
-        puts "You may enter 'main to access the main menu and 'exit' at any time to exit the program."
+        puts "You may enter 'main' to access the main menu and 'exit' at any time to exit the program."
         menu
     end
 

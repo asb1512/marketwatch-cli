@@ -3,11 +3,12 @@ require_relative "./alpha_vantage.rb"
 
 class Display
 
-    attr_reader :alpha
+    attr_reader :alpha, :intraday, :daily, :adjusted
 
     # Gives access to function type and desired symbol from user within the AlphaVantage class.
     def initialize
         @alpha = AlphaVantage.new
+        @daily = "Time Series (Daily)"
     end
 
     # Handles the logic for daily data requests.
@@ -35,15 +36,19 @@ class Display
                     display_daily
                 elsif y_n_input == "yes"
                     puts "\n"
-                    puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_YESTERDAY] 
+                    # puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_YESTERDAY]
+                    display_data(self.alpha.yesterday)
                 end
-            else
-                puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_TODAY]
+            elsif 
+                # puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_TODAY]
+                display_data(self.alpha.today)
             end
         elsif date_input == "yesterday"
             puts "\n"
             # puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_YESTERDAY]
             display_data(self.alpha.yesterday)
+        elsif date_input.match?(/\d{4}-\d{2}-\d{2}/)
+            display_data(date_input)
         elsif date_input == "main"
             list_display_options
         elsif date_input == "" || date_input == " "
@@ -60,8 +65,8 @@ class Display
     def display_data(date)
         # Makes API call with correct function type and date based upon user input.
         # run = self.alpha.params[self.alpha.function][date]
-        run = self.alpha.params[self.alpha.function.gsub("function=","")]
-        binding.pry
+        run = self.alpha.params[self.daily][date]
+        
         puts <<-DOC
             |#{self.alpha.symbol.gsub('=', ' = ')}
             |   OPEN: $#{run["1. open"]}
