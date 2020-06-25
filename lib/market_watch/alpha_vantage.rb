@@ -6,9 +6,17 @@ require 'pry'
 # Responsible for making calls to API.
 class AlphaVantage
 
+    attr_reader :api_key, :date_today, :date_yesterday, :desired_date
+
 # API Key: W950UXLR0AH9JKAL
 # This will be specific to the user.
-API_KEY = "apikey=W950UXLR0AH9JKAL"
+# API_KEY = "apikey=W950UXLR0AH9JKAL"
+
+def initialize
+    @api_key = "apikey=W950UXLR0AH9JKAL"
+    @date_today = Date.today.strftime
+    @date_yesterday = Date.today.prev_day.strftime
+end
 
 # This returns today's date as: YYYY-MM-DD
 # DATE_TODAY = Time.now.to_s[/\d{4}-\d{2}-\d{2}/]

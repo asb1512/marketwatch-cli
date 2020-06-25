@@ -26,7 +26,7 @@ class Display
         if date_input == "today"
             puts "\n"
             # If data for the current is not yet available, prompts user if they would like to see yesterday's numbers.
-            if self.alpha.params["Time Series (Daily)"][DATE_TODAY] == nil
+            if self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_TODAY] == nil
                 puts "Data for today is not yet available."
                 puts "\n"
                 puts "Would you like to see yesterday's numbers? Enter 'yes' or 'no':"
@@ -35,15 +35,16 @@ class Display
                     display_daily
                 elsif y_n_input == "yes"
                     puts "\n"
-                    puts self.alpha.params["Time Series (Daily)"][DATE_YESTERDAY] 
+                    puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_YESTERDAY] 
                 end
             else
-                puts self.alpha.params["Time Series (Daily)"][DATE_TODAY]
+                puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_TODAY]
             end
         elsif date_input == "yesterday"
             puts "\n"
+            # puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_YESTERDAY]
             binding.pry
-            puts self.alpha.params["Time Series (Daily)"][DATE_YESTERDAY]
+            display_data(AlphaVantage::DATE_YESTERDAY)
         elsif date_input == "main"
             list_display_options
         elsif date_input == "" || date_input == " "
@@ -57,13 +58,16 @@ class Display
         
     end
 
-    def display_data
+    def display_data(date)
+        # Makes API call with correct function type and date based upon user input.
+        run = self.alpha.params[self.alpha.function][date]
+
         puts <<-DOC
-            |   OPEN: $
-            |   HIGH: $
-            |    LOW: $
-            |  CLOSE: $
-            | VOLUME: $
+            |   OPEN: $#{run["1. open"]}
+            |   HIGH: $#{run["2. high"]}
+            |    LOW: $#{run["3. low"]}
+            |  CLOSE: $#{run["4. close"]}
+            | VOLUME: $#{run["5. volume"]}
         DOC
     end
 
