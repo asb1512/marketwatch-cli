@@ -3,6 +3,14 @@ require_relative "./alpha_vantage.rb"
 
 class Display
 
+    attr_accessor :alpha
+
+    def initialize
+        @alpha = AlphaVantage.new
+    end
+
+    # ALPHA = AlphaVantage.new
+
     # Handles the logic for daily data requests.
     # Returns 'open', 'high', 'low', 'close', and 'volume'.
     def display_daily
@@ -10,7 +18,7 @@ class Display
         # Stores ticker symbol from user input.
         symbol_input = gets.strip.upcase
         # Instantiates new instance of AlphaVantage class.
-        alpha = AlphaVantage.news
+        alpha = AlphaVantage.new
         # Sets the value of @symbol according to the ticker symbol input by the user.
         alpha.daily(symbol_input)
 
@@ -38,6 +46,7 @@ class Display
         elsif date_input == "yesterday"
             puts "\n"
             puts alpha.params["Time Series (Daily)"][DATE_YESTERDAY]
+            binding.pry
         elsif date_input == "main"
             list_display_options
         elsif date_input == "" || date_input == " "
@@ -48,10 +57,10 @@ class Display
             puts "\n"
             puts alpha.params["Time Series (Daily)"][date_input]
         end
-        binding.pry
+        
     end
 
-    def daily_data_handler
+    def display_data
         
     end
 
