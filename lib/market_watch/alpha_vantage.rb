@@ -8,7 +8,10 @@ require 'pry'
 API_KEY = "apikey=W950UXLR0AH9JKAL"
 
 # This returns today's date as: YYYY-MM-DD
-DATE_TODAY = Time.now.to_s[/\d{4}-\d{2}-\d{2}/]
+# DATE_TODAY = Time.now.to_s[/\d{4}-\d{2}-\d{2}/]
+# DATE_TODAY = Time.now.strftime('%Y-%m-%d')
+DATE_TODAY = Date.today.strftime
+DATE_YESTERDAY = Date.today.prev_day.strftime
 
 # Responsible for making calls to API.
 class AlphaVantage
@@ -24,20 +27,23 @@ class AlphaVantage
         self.class.get("#{@function}&#{@symbol}&#{API_KEY}")
     end
 
-    # 
+    # Sets the correct instance variable values for the correct API call formatting. 
     def intraday(symbol = "AAPL", interval = "5")
         @function = "function=TIME_SERIES_INTRADAY"
         @symbol = "symbol=#{symbol}"
         @interval = "interval=#{interval}min"
     end
 
+    # Sets the correct instance variable values for the correct API call formatting.
     def daily(symbol = "AAPL")
         @function = "function=TIME_SERIES_DAILY"
         @symbol = "symbol=#{symbol}"
     end
 
-    def daily_adjusted
-
+    # Sets the correct instance variable values for the correct API call formatting.
+    def daily_adjusted(symbol = "AAPL")
+        @function = "function=TIME_SERIES_DAILY_ADJUSTED"
+        @symbol = "symbol=#{symbol}"
     end
 
 end

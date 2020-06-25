@@ -7,7 +7,9 @@ class CLI
     def call
         puts "Welcome to Market Watch!"
         list_display_options
+        puts "\n"
         goodbye
+        puts "\n"
     end
 
     # Formats call to Alpha Vantage API dependent on which function the user desires.
@@ -26,11 +28,11 @@ class CLI
         # input = nil
         # while input != "exit"
             input = gets.strip.downcase
-            if input == "1"
+            if input == "1" || input == "intraday"
                 intraday
-            elsif input == "2"
+            elsif input == "2" || input == "daily"
                 Display.new.display_daily
-            elsif input == "3"
+            elsif input == "3" || input == "daily adjusted" || input == "adjusted"
                 daily_adjusted
             elsif input == "main"
                 list_display_options
