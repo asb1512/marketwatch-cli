@@ -4,17 +4,23 @@ require_relative "./alpha_vantage.rb"
 class Display
 
     # Handles the logic for daily data requests.
+    # Returns 'open', 'high', 'low', 'close', and 'volume'.
     def display_daily
         puts "Please enter the symbol for the company you're looking for:"
+        # Stores ticker symbol from user input.
         symbol_input = gets.strip.upcase
-        alpha = AlphaVantage.new
+        # Instantiates new instance of AlphaVantage class.
+        alpha = AlphaVantage.news
+        # Sets the value of @symbol according to the ticker symbol input by the user.
         alpha.daily(symbol_input)
 
+        # Prompts user for time frame of the data.
         puts "Would you like to see data from today, yesterday, or another day?"
         puts "Enter 'today', 'yesterday', or enter a date in this format 'YYYY-MM-DD':"
         date_input = gets.strip.downcase
         if date_input == "today"
             puts "\n"
+            # If data for the current is not yet available, prompts user if they would like to see yesterday's numbers.
             if alpha.params["Time Series (Daily)"][DATE_TODAY] == nil
                 puts "Data for today is not yet available."
                 puts "\n"
@@ -42,7 +48,11 @@ class Display
             puts "\n"
             puts alpha.params["Time Series (Daily)"][date_input]
         end
+        binding.pry
+    end
 
+    def daily_data_handler
+        
     end
 
 end

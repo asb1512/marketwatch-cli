@@ -5,7 +5,10 @@ require_relative "./display.rb"
 class CLI
 
     def call
+        puts "\n"
         puts "Welcome to Market Watch!"
+        puts "----------------------------------------------"
+        puts "\n"
         list_display_options
         puts "\n"
         goodbye
@@ -16,9 +19,11 @@ class CLI
     def list_display_options
         puts "Please enter the corresponding number of your desired data type:"
         puts <<-DOC.gsub /^\s*/, ''
+            -----------------
             1. Intraday
             2. Daily
             3. Daily Adjusted
+            -----------------
         DOC
         puts "You may enter 'main to access the main menu and 'exit' at any time to exit the program."
         menu
