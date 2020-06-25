@@ -3,6 +3,9 @@ require 'httparty'
 require 'date'
 require 'pry'
 
+# Responsible for making calls to API.
+class AlphaVantage
+
 # API Key: W950UXLR0AH9JKAL
 # This will be specific to the user.
 API_KEY = "apikey=W950UXLR0AH9JKAL"
@@ -12,9 +15,6 @@ API_KEY = "apikey=W950UXLR0AH9JKAL"
 # DATE_TODAY = Time.now.strftime('%Y-%m-%d')
 DATE_TODAY = Date.today.strftime
 DATE_YESTERDAY = Date.today.prev_day.strftime
-
-# Responsible for making calls to API.
-class AlphaVantage
 
     attr_accessor :function, :symbol, :interval, :key
     # Calls API base URL.
