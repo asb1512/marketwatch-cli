@@ -33,6 +33,10 @@ class AlphaVantage
         self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
     end
 
+    def params_daily_adjusted
+        self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
+    end
+
     def params_intraday
         self.class.get("#{self.function}&#{self.symbol}&#{self.interval}&#{self.key}")
     end

@@ -38,7 +38,7 @@ class CLI
             elsif input == "2" || input == "daily"
                 Display.new.display_daily
             elsif input == "3" || input == "daily adjusted" || input == "adjusted"
-                daily_adjusted
+                Display.new.display_daily_adjusted
             elsif input == "main"
                 list_display_options
             elsif input == "exit"
