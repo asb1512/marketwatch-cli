@@ -32,8 +32,10 @@ class Display
                 puts "\n"
                 puts "Would you like to see yesterday's numbers? Enter 'yes' or 'no':"
                 y_n_input = gets.strip.downcase
+                # If user selects 'no' then user is presented with symbol input menu.
                 if y_n_input == "no"
                     display_daily
+                # If user selects 'yes' then data for the selected symbol is shown from yesterday.
                 elsif y_n_input == "yes"
                     puts "\n"
                     # puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_YESTERDAY]
