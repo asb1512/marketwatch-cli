@@ -34,7 +34,7 @@ class CLI
         # while input != "exit"
             input = gets.strip.downcase
             if input == "1" || input == "intraday"
-                intraday
+                Display.new.display_intraday
             elsif input == "2" || input == "daily"
                 Display.new.display_daily
             elsif input == "3" || input == "daily adjusted" || input == "adjusted"
