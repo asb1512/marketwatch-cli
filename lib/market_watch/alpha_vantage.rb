@@ -17,7 +17,7 @@ class AlphaVantage
 
     attr_reader :key, :today, :yesterday, :desired_date 
     attr_accessor :function, :symbol, :interval, :key
-    
+
     # Calls API base URL.
     include HTTParty
     base_uri "https://www.alphavantage.co/query?"
@@ -28,10 +28,13 @@ class AlphaVantage
         @yesterday = Date.today.prev_day.strftime
     end
 
-    # Defines parameters necessary to request data types.
-    def params
-        # self.class.get('function=TIME_SERIES_DAILY&symbol=DOCU&apikey=W950UXLR0AH9JKAL')
-        self.class.get("#{@function}&#{@symbol}&#{self.key}")
+    # Defines parameters necessary to request data types. The data type requiring extra info in get request is intraday.
+    def params_daily
+        self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
+    end
+
+    def params_intraday
+        self.class.get("#{self.function}&#{self.symbol}&#{self.interval}&#{self.key}")
     end
 
     # Sets the correct instance variable values for the correct API call formatting. 
