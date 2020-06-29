@@ -62,6 +62,16 @@ class AlphaVantage
 
 end
 
+class Date < AlphaVantage
+    def dayname
+        DAYNAMES[self.wday]
+    end
+
+    def abbr_dayname
+        ABBR_DAYNAMES[self.wday]
+    end
+    binding.pry
+end
 
 # Used for testing/development purposes.
 # alpha_vantage = AlphaVantage.new

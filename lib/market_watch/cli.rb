@@ -48,7 +48,7 @@ class CLI
     end
 
     def goodbye
-        puts "Thanks for using Market Watch. " + "See you tomorrow!".colorize(:green)
+        puts "Thanks for using Market Watch. " + "See you tomorrow!".colorize(:blue)
     end
 
 end

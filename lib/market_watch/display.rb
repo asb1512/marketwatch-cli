@@ -200,15 +200,23 @@ class Display
         # run = self.alpha.params[self.alpha.function][date]
         run = self.alpha.params_daily[self.daily][date]
         
-        puts <<-DOC
-            |#{self.alpha.symbol.gsub('=', ' = ')}
-            |   OPEN: $#{run["1. open"]}
-            |   HIGH: $#{run["2. high"]}
-            |    LOW: $#{run["3. low"]}
-            |  CLOSE: $#{run["4. close"]}
-            | VOLUME: $#{run["5. volume"]}
-        DOC
-        
+        # puts <<-DOC
+        #     |#{self.alpha.symbol.gsub('=', ' = ')}
+        #     |   OPEN: $#{run["1. open"]}
+        #     |   HIGH: $#{run["2. high"]}
+        #     |    LOW: $#{run["3. low"]}
+        #     |  CLOSE: $#{run["4. close"]}
+        #     | VOLUME: $#{run["5. volume"]}
+        # DOC
+
+        # Cannot use a here doc and use colorize gem at the same time :(
+        puts "|#{self.alpha.symbol.gsub('=', ' = ')}".colorize(:light_blue)
+        puts "|   OPEN: $#{run["1. open"]}".colorize(:green)
+        puts "|   HIGH: $#{run["2. high"]}".colorize(:green)
+        puts "|    LOW: $#{run["3. low"]}".colorize(:green)
+        puts "|  CLOSE: $#{run["4. close"]}".colorize(:green)
+        puts "| VOLUME: $#{run["5. volume"]}".colorize(:green)
+
     end
 
     def intraday_format(date)
