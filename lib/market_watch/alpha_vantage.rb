@@ -1,3 +1,5 @@
+require_relative "./date.rb"
+
 require 'rubygems'
 require 'httparty'
 require 'date'
@@ -15,7 +17,7 @@ class AlphaVantage
 # DATE_TODAY = Date.today.strftime
 # DATE_YESTERDAY = Date.today.prev_day.strftime
 
-    attr_reader :key, :today, :yesterday, :desired_date 
+    attr_reader :key, :today, :yesterday, :desired_date, :date
     attr_accessor :function, :symbol, :interval, :key
 
     # Calls API base URL.
@@ -26,6 +28,7 @@ class AlphaVantage
         @key = "apikey=W950UXLR0AH9JKAL"
         @today = Date.today.strftime
         @yesterday = Date.today.prev_day.strftime
+        @date = Date.new
     end
 
     # Defines parameters necessary to request data types. The data type requiring extra info in get request is intraday.
@@ -59,18 +62,9 @@ class AlphaVantage
         @function = "function=TIME_SERIES_DAILY_ADJUSTED"
         @symbol = "symbol=#{symbol}"
     end
-
-end
-
-class Date < AlphaVantage
-    def dayname
-        DAYNAMES[self.wday]
-    end
-
-    def abbr_dayname
-        ABBR_DAYNAMES[self.wday]
-    end
     binding.pry
+    puts self.date.dayname
+    puts self.date.abbr_dayname
 end
 
 # Used for testing/development purposes.
