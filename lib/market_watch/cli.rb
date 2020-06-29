@@ -8,6 +8,7 @@ class CLI
         puts "\n"
         puts "Welcome to Market Watch!"
         puts "----------------------------------------------"
+        puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$".colorize(:green)
         puts "\n"
         list_display_options
         puts "\n"
@@ -47,7 +48,7 @@ class CLI
     end
 
     def goodbye
-        puts "Thanks for using Market Watch. See you tomorrow!"
+        puts "Thanks for using Market Watch. " + "See you tomorrow!".colorize(:green)
     end
 
 end

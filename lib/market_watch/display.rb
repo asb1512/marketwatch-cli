@@ -1,6 +1,7 @@
 # Allows to acces to class constants for dates.
 require_relative "./alpha_vantage.rb"
 require 'json'
+require 'colorize'
 
 
 class Display
@@ -217,9 +218,9 @@ class Display
         run = self.alpha.params_intraday[self.intraday]
 
         # JSON.parse(strf_run)
-
+        puts "––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––".colorize(:green)
         run.each do |key, value|
-            puts "#{key} = #{value}"
+            puts "#{key} = #{value}".colorize(:light_blue)
         end
 
         # formatted = run.each do |key, value|
