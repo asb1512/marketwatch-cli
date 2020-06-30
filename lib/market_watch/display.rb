@@ -19,7 +19,7 @@ class Display
     end
 
 
-
+    # –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     # Handles the logic for daily data requests.
     # Returns 'open', 'high', 'low', 'close', and 'volume'.
     def display_daily
@@ -87,7 +87,7 @@ class Display
         
     end
 
-
+    # –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     # Handles the logic for intraday data requests.
     # Returns 'open', 'high', 'low', 'close', and 'volume' with respect to the given or default time interval.
     def display_intraday
@@ -106,9 +106,26 @@ class Display
         self.alpha.intraday(symbol_input, interval_input)
 
         # Prompts user for time frame of the data.
-        puts "Would you like to see data from today, yesterday, or another day?"
-        puts "Enter 'today', 'yesterday', or enter a date in this format 'YYYY-MM-DD':"
-        date_input = gets.strip.downcase
+        if self.alpha.date.day_today != "Saturday" && self.alpha.date.day_today != "Sunday" && self.alpha.date.day_today != "Monday"
+            puts "Would you like to see data from today, yesterday, or another trading day?"
+            puts "Make sure it's a trading day!".colorize(:red)
+            puts "Enter 'today', 'yesterday', or enter a date in this format 'YYYY-MM-DD':"
+            date_input = gets.strip.downcase
+        elsif self.alpha.date.day_today == "Monday"
+            puts "Would you like to see data from today or another trading day?"
+            puts "Make sure it's a trading day!".colorize(:red)
+            puts "Enter 'today' or enter a date in this format 'YYYY-MM-DD':"
+            date_input = gets.strip.downcase
+        elsif self.alpha.date.day_today == "Saturday" || self.alpha.date.day_today == "Sunday"
+            puts "Today isn't a trading day!".colorize(:red)
+            puts "Please enter a valid trading day:"
+            date_input = gets.strip.downcase
+        end
+
+        # Prompts user for time frame of the data.
+        # puts "Would you like to see data from today, yesterday, or another day?"
+        # puts "Enter 'today', 'yesterday', or enter a date in this format 'YYYY-MM-DD':"
+        # date_input = gets.strip.downcase
 
         if date_input == "today"
             puts "\n"
@@ -155,6 +172,7 @@ class Display
     end
 
 
+    # –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     def display_daily_adjusted
 
         puts "––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––"
@@ -165,9 +183,27 @@ class Display
         self.alpha.daily_adjusted(symbol_input)
 
         # Prompts user for time frame of the data.
-        puts "Would you like to see data from today, yesterday, or another day?"
-        puts "Enter 'today', 'yesterday', or enter a date in this format 'YYYY-MM-DD':"
-        date_input = gets.strip.downcase
+        if self.alpha.date.day_today != "Saturday" && self.alpha.date.day_today != "Sunday" && self.alpha.date.day_today != "Monday"
+            puts "Would you like to see data from today, yesterday, or another trading day?"
+            puts "Make sure it's a trading day!".colorize(:red)
+            puts "Enter 'today', 'yesterday', or enter a date in this format 'YYYY-MM-DD':"
+            date_input = gets.strip.downcase
+        elsif self.alpha.date.day_today == "Monday"
+            puts "Would you like to see data from today or another trading day?"
+            puts "Make sure it's a trading day!".colorize(:red)
+            puts "Enter 'today' or enter a date in this format 'YYYY-MM-DD':"
+            date_input = gets.strip.downcase
+        elsif self.alpha.date.day_today == "Saturday" || self.alpha.date.day_today == "Sunday"
+            puts "Today isn't a trading day!".colorize(:red)
+            puts "Please enter a valid trading day:"
+            date_input = gets.strip.downcase
+        end
+
+        # Prompts user for time frame of the data.
+        # puts "Would you like to see data from today, yesterday, or another day?"
+        # puts "Enter 'today', 'yesterday', or enter a date in this format 'YYYY-MM-DD':"
+        # date_input = gets.strip.downcase
+
         if date_input == "today"
             puts "\n"
             # If data for the current is not yet available, prompts user if they would like to see yesterday's numbers.
