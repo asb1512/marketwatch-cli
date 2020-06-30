@@ -62,9 +62,7 @@ class AlphaVantage
         @function = "function=TIME_SERIES_DAILY_ADJUSTED"
         @symbol = "symbol=#{symbol}"
     end
-    binding.pry
-    puts self.date.dayname
-    puts self.date.abbr_dayname
+    
 end
 
 # Used for testing/development purposes.
