@@ -4,6 +4,8 @@ require 'rubygems'
 require 'httparty'
 require 'date'
 require 'pry'
+require 'json'
+require 'colorize'
 
 # Responsible for making calls to API.
 class AlphaVantage
@@ -33,14 +35,17 @@ class AlphaVantage
 
     # Defines parameters necessary to request data types. The data type requiring extra info in get request is intraday.
     def params_daily
+        sleep 1
         self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
     end
 
     def params_daily_adjusted
+        sleep 1
         self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
     end
 
     def params_intraday
+        sleep 1
         self.class.get("#{self.function}&#{self.symbol}&#{self.interval}&#{self.key}")
     end
 

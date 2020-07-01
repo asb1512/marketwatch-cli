@@ -1,4 +1,10 @@
 require_relative "./market_watch/version"
+require_relative './market_watch/cli'
+
+require 'rubygems'
+require 'httparty'
+require 'date'
+require 'pry'
 
 # module Marketwatch
 #   module Cli
@@ -6,5 +12,3 @@ require_relative "./market_watch/version"
 #     # Your code goes here...
 #   end
 # end
-
-require_relative './market_watch/cli'
