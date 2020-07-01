@@ -1,8 +1,8 @@
 # Marketwatch::Cli
+A simple CLI that leverages the Alpha Vantage API to deliver up-to-date stock info to the user.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/marketwatch/cli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is a Ruby library to interface with the Alpha Vantage Public API, allowing the user to get stock info on the desired equity without leaving the command line.
+This project is a submission for a Flatiron School ruby gem project.
 
 ## Installation
 
@@ -22,10 +22,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+(= Requirements =
 
-# marketwatch-cli
- A simple CLI that leverages the Alpha Vantage API to deliver up-to-date stock info to the user.
+This code has been run and tested on Ruby 2.6.1.
+
+)
+
+== External Deps ==
+
+* HTTParty (https://github.com/jnunemaker/httparty) for making HTTP requests.
+* colorize (https://github.com/fazibear/colorize) for coloring strings printed in the console.
+
+== Standard Library Deps ==
+
+* date (https://github.com/ruby/date) for handling the date of the requested data, as well as verifying whether the day in question is a trading/non-trading day.
 
 ## Development
 

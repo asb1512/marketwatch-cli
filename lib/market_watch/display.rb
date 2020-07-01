@@ -304,17 +304,28 @@ class Display
         # run = self.alpha.params[self.alpha.function][date]
         run = self.alpha.params_daily_adjusted[self.daily_adjusted][date]
         
-        puts <<-DOC
-            |#{self.alpha.symbol.gsub('=', ' = ')}
-            |              OPEN: $#{run["1. open"]}
-            |              HIGH: $#{run["2. high"]}
-            |               LOW: $#{run["3. low"]}
-            |             CLOSE: $#{run["4. close"]}
-            |    ADJUSTED CLOSE: $#{run["5. adjusted close"]}
-            |            VOLUME: $#{run["6. volume"]}
-            |   DIVIDEND AMOUNT: $#{run["7. dividend amount"]}
-            | SPLIT COEFFICIENT: $#{run["8. split coefficient"]}
-        DOC
+        # Cannot use a here doc and use colorize gem at the same time :(
+        # puts <<-DOC
+        #     |#{self.alpha.symbol.gsub('=', ' = ')}
+        #     |              OPEN: $#{run["1. open"]}
+        #     |              HIGH: $#{run["2. high"]}
+        #     |               LOW: $#{run["3. low"]}
+        #     |             CLOSE: $#{run["4. close"]}
+        #     |    ADJUSTED CLOSE: $#{run["5. adjusted close"]}
+        #     |            VOLUME: $#{run["6. volume"]}
+        #     |   DIVIDEND AMOUNT: $#{run["7. dividend amount"]}
+        #     | SPLIT COEFFICIENT: $#{run["8. split coefficient"]}
+        # DOC
+
+        puts "|#{self.alpha.symbol.gsub('=', ' = ')}".colorize(:light_blue)
+        puts "|              OPEN: $#{run["1. open"]}".colorize(:green)
+        puts "|              HIGH: $#{run["2. high"]}".colorize(:green)
+        puts "|               LOW: $#{run["3. low"]}".colorize(:green)
+        puts "|             CLOSE: $#{run["4. close"]}".colorize(:green)
+        puts "|    ADJUSTED CLOSE: $#{run["5. adjusted close"]}".colorize(:green)
+        puts "|            VOLUME: $#{run["6. volume"]}".colorize(:green)
+        puts "|   DIVIDEND AMOUNT: $#{run["7. dividend amount"]}".colorize(:green)
+        puts "| SPLIT COEFFICIENT: $#{run["8. split coefficient"]}".colorize(:green)
         
     end
 
