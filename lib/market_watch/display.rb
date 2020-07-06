@@ -51,7 +51,7 @@ class Display
             puts "\n"
             # If data for the current is not yet available, prompts user if they would like to see yesterday's numbers.
             if self.alpha.params_daily["Time Series (Daily)"][self.alpha.today] == nil
-                puts "Data for today is not yet available."
+                puts "Data for today is not yet available.".colorize(:red)
                 puts "\n"
                 puts "Would you like to see yesterday's numbers? Enter 'yes' or 'no':"
                 y_n_input = gets.strip.downcase
