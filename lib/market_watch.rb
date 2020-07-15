@@ -1,8 +1,8 @@
 require 'bundler'
 
-Bundler.require
+# Bundler.require
 
-require_all '../lib'
+# require_all '../lib'
 
 require_relative "./market_watch/version"
 require_relative "./market_watch/cli"

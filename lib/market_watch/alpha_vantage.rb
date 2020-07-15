@@ -7,6 +7,9 @@ require 'pry'
 require 'json'
 require 'colorize'
 
+# ________________________________
+# .env gem to hide API key, put in .gitignore file and use a .env variable to hide your API key
+# ________________________________
 # Responsible for making calls to API.
 class AlphaVantage
 # API Key: W950UXLR0AH9JKAL

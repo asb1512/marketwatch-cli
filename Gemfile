@@ -5,4 +5,10 @@ gemspec
 
 gem "rake", "~> 12.0"
 gem "rspec", "~> 3.0"
-gem "require_all"
+# gem "pry"
+# gem "bundler"
+# gem "httparty"
+# gem "date"
+# gem "json"
+# gem "colorize"
+# gem "require_all"
