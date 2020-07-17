@@ -4,48 +4,29 @@ require_relative "./display.rb"
 # CLI Controller
 class CLI
 
+    attr_accessor :symbol_input
+
     def welcome
         puts "\n"
         puts "Welcome to Market Watch!"
         puts "----------------------------------------------"
         puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$".colorize(:green)
         puts "\n"
-        list_display_options
+        symbol_choice
         puts "\n"
         goodbye
         puts "\n"
     end
 
     # Formats call to Alpha Vantage API dependent on which function the user desires.
-    def list_display_options
-        puts "Please enter the corresponding number of your desired data type:"
-        puts <<-DOC.gsub /^\s*/, ''
-            -----------------
-            1. Intraday
-            2. Daily
-            3. Daily Adjusted
-            -----------------
-        DOC
-        puts "You may enter 'main' to access the main menu and 'exit' at any time to exit the program."
+    def symbol_choice
+        puts "Please enter the symbol of the equity that you are interested in:"
+        @symbol_input = gets.strip.upcase
+        puts "You may enter 'main' to access the main menu and 'exit' at any time to exit the program.".colorize(:red)
         menu
     end
 
-    def menu
-        # input = nil
-        # while input != "exit"
-            input = gets.strip.downcase
-            if input == "1" || input == "intraday"
-                Display.new.display_intraday
-            elsif input == "2" || input == "daily"
-                Display.new.display_daily
-            elsif input == "3" || input == "daily adjusted" || input == "adjusted"
-                Display.new.display_daily_adjusted
-            elsif input == "main"
-                list_display_options
-            elsif input == "exit"
-            end
-        # end
-    end
+    
 
     def goodbye
         puts "Thanks for using Market Watch. " + "See you tomorrow!".colorize(:blue)
