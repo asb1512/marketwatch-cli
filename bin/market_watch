@@ -2,4 +2,4 @@
 
 require './lib/market_watch'
 
-CLI.new.welcome
+cli = CLI.new.welcome

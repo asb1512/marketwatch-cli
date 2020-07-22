@@ -1,4 +1,7 @@
 require_relative "./date.rb"
+require_relative "./company.rb"
+require_relative "./display.rb"
+require_relative "./cli.rb"
 
 require 'rubygems'
 require 'httparty'
@@ -23,7 +26,7 @@ class AlphaVantage
 # DATE_YESTERDAY = Date.today.prev_day.strftime
 
     attr_reader :key, :today, :yesterday, :desired_date, :date
-    attr_accessor :function, :symbol, :interval, :key, :get_request
+    attr_accessor :function, :symbol, :symbol_format, :key, :get_request
 
     # Calls API base URL.
     include HTTParty
@@ -34,49 +37,15 @@ class AlphaVantage
         @today = Date.today.strftime
         @yesterday = Date.today.prev_day.strftime
         @date = Date.new
-        @get_request = self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
-        
-    end
-
-    # Defines parameters necessary to request data types. The data type requiring extra info in get request is intraday.
-    # def params_daily
-    #     sleep 1
-    #     @get_request = self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
-    #     binding.pry
-    # end
-
-#@output ||= self.class.get("#{self.function}&#{self.symbol}&#{self.key}") 
-    # def params_daily_adjusted
-    #     sleep 1
-    #     self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
-    # end
-
-    # def params_intraday
-    #     sleep 1
-    #     self.class.get("#{self.function}&#{self.symbol}&#{self.interval}&#{self.key}")
-    # end
-
-    # Sets the correct instance variable values for the correct API call formatting. 
-    # def intraday(symbol = "AAPL", interval = "5")
-    #     @function = "function=TIME_SERIES_INTRADAY"
-    #     @symbol = "symbol=#{symbol}"
-    #     @interval = "interval=#{interval}min"
-    # end
-
-    # Sets the correct instance variable values for the correct API call formatting.
-    def daily(symbol = "AAPL")
+        @request = self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
+        # Sets the correct instance variable values for the correct API call formatting.
         @function = "function=TIME_SERIES_DAILY"
-        @symbol = "symbol=#{symbol}"
+        @symbol_format = "symbol=#{symbol}"
+        # binding.pry
     end
 
-    # Sets the correct instance variable values for the correct API call formatting.
-    # def daily_adjusted(symbol = "AAPL")
-    #     @function = "function=TIME_SERIES_DAILY_ADJUSTED"
-    #     @symbol = "symbol=#{symbol}"
-    # end
+    def get_request
+        self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
+    end
     
 end
-
-# Used for testing/development purposes.
-# alpha_vantage = AlphaVantage.new
-# puts alpha_vantage.params

@@ -7,13 +7,14 @@ require 'colorize'
 
 class Display
 
-    attr_reader :alpha, :daily
+    attr_reader :alpha, :daily, :company
 
 
     # Gives access to function type and desired symbol from user within the AlphaVantage class.
     def initialize
         @alpha = AlphaVantage.new
         @daily = "Time Series (Daily)"
+        @company = Company.new()
     end
 
 
@@ -21,12 +22,6 @@ class Display
     # Handles the logic for daily data requests.
     # Returns 'open', 'high', 'low', 'close', and 'volume'.
     def display_daily
-        puts "––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––"
-        puts "Please enter the symbol for the company you're looking for:"
-        # Stores ticker symbol from user input.
-        symbol_input = gets.strip.upcase
-        # Sets the value of @symbol according to the ticker symbol input by the user.
-        self.alpha.daily(symbol_input)
 
         # Prompts user for time frame of the data.
         if self.alpha.date.day_today != "Saturday" && self.alpha.date.day_today != "Sunday" && self.alpha.date.day_today != "Monday"
@@ -92,16 +87,6 @@ class Display
         # run = self.alpha.params[self.alpha.function][date]
         run = self.alpha.params_daily[self.daily][date]
         
-        # puts <<-DOC
-        #     |#{self.alpha.symbol.gsub('=', ' = ')}
-        #     |   OPEN: $#{run["1. open"]}
-        #     |   HIGH: $#{run["2. high"]}
-        #     |    LOW: $#{run["3. low"]}
-        #     |  CLOSE: $#{run["4. close"]}
-        #     | VOLUME: $#{run["5. volume"]}
-        # DOC
-
-        # Cannot use a here doc and use colorize gem at the same time :(
         puts "|#{self.alpha.symbol.gsub('=', ' = ')}".colorize(:light_blue)
         puts "|   OPEN: $#{run["1. open"]}".colorize(:green)
         puts "|   HIGH: $#{run["2. high"]}".colorize(:green)
