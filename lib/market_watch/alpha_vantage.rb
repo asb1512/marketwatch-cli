@@ -25,27 +25,51 @@ class AlphaVantage
 # DATE_TODAY = Date.today.strftime
 # DATE_YESTERDAY = Date.today.prev_day.strftime
 
-    attr_reader :key, :today, :yesterday, :desired_date, :date
-    attr_accessor :function, :symbol, :symbol_format, :key, :get_request
+    attr_reader :key, :today, :yesterday, :date
+    attr_accessor :symbol, :symbol_format, :date_desired, :key, :get_request, :response, :company
+
 
     # Calls API base URL.
     include HTTParty
     base_uri "https://www.alphavantage.co/query?"
+
 
     def initialize
         @key = "apikey=W950UXLR0AH9JKAL"
         @today = Date.today.strftime
         @yesterday = Date.today.prev_day.strftime
         @date = Date.new
-        @request = self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
-        # Sets the correct instance variable values for the correct API call formatting.
-        @function = "function=TIME_SERIES_DAILY"
-        @symbol_format = "symbol=#{symbol}"
+        @company = Company.new
         # binding.pry
     end
+    
+
+    # Sets the correct instance variable values for the correct API call formatting.
+    def symbol_formatting
+        @symbol_format = "symbol=#{@symbol}"
+    end
+
 
     def get_request
-        self.class.get("#{self.function}&#{self.symbol}&#{self.key}")
+        self.class.get("function=TIME_SERIES_DAILY&#{self.symbol_format}&#{self.key}")
+    end
+
+
+    def response
+        # Unsure how to store JSON response without making new API call.
+        @response ||= get_request
+    end
+
+
+    def assign_data
+        self.company.symbol = @symbol
+        self.company.date = @date_desired
+
+        self.company.open = response["Time Series (Daily)"][@date_desired]["1. open"]
+        self.company.high = response["Time Series (Daily)"][@date_desired]["2. high"]
+        self.company.low = response["Time Series (Daily)"][@date_desired]["3. low"]
+        self.company.close = response["Time Series (Daily)"][@date_desired]["4. close"]
+        self.company.volume = response["Time Series (Daily)"][@date_desired]["5. volume"]
     end
     
 end
