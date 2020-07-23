@@ -131,27 +131,11 @@ class CLI
         y_n_input = gets.strip.downcase
 
         if y_n_input == "y" || y_n_input == "yes"
-            if self.api_call.date.day_today != "Saturday" && self.api_call.date.day_today != "Sunday" && self.api_call.date.day_today != "Monday"
-                puts "Would you like to see #{self.api_call.company.symbol} data from today, yesterday, or another trading day?"
-                puts "Make sure it's a trading day!".colorize(:red)
-                puts "Enter 'today', 'yesterday', or enter a date in this format 'YYYY-MM-DD':"
-                date_input = gets.strip.downcase
-            elsif self.api_call.date.day_today == "Monday"
-                puts "Would you like to see #{self.api_call.company.symbol} data from today or another trading day?"
-                puts "Make sure it's a trading day!".colorize(:red)
-                puts "Enter 'today' or enter a date in this format 'YYYY-MM-DD':"
-                date_input = gets.strip.downcase
-            elsif self.api_call.date.day_today == "Saturday" || self.api_call.date.day_today == "Sunday"
-                puts "Today isn't a trading day!".colorize(:red)
-                puts "Please enter a valid trading day:"
-                date_input = gets.strip.downcase
-            end
-            self.api_call.date_desired = date_input
-            self.api_call.assign_data
-            display_data
+            
+            date_choice
 
         elsif y_n_input == "n" || y_n_input == "no" || y_n_input == "main"
-            welcome
+            symbol_choice
         
         elsif y_n_input == "exit"
             puts "\n"
@@ -159,7 +143,7 @@ class CLI
 
         else
             puts "Invalid input.".colorize(:red)
-            puts "Please enter 'yes' or 'no':"
+            more_data
         end
 
     end
