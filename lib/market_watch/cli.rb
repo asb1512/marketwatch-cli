@@ -17,9 +17,8 @@ class CLI
         puts "\n"
         date_choice
         puts "\n"
-        goodbye
+        more_data
         puts "\n"
-        binding.pry
     end
 
 
@@ -29,11 +28,20 @@ class CLI
     def symbol_choice
         puts "Please enter the symbol of the equity that you are interested in:"
         @symbol_input = gets.strip.upcase
-        @api_call = AlphaVantage.new
-        self.api_call.symbol = @symbol_input
-        self.api_call.symbol_formatting
-        self.api_call.get_request
+
+        puts "\n"
         puts "You may enter 'main' to access the main menu and 'exit' at any time to exit the program.".colorize(:red)
+        puts "\n"
+
+        if @symbol_input == "EXIT"
+            goodbye
+            exit
+        else
+            @api_call = AlphaVantage.new
+            self.api_call.symbol = @symbol_input
+            self.api_call.symbol_formatting
+            self.api_call.get_request
+        end
     end
 
 
@@ -77,8 +85,7 @@ class CLI
                     self.api_call.date_desired = @formatted_date_input
                 end
 
-            elsif 
-                    # puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_TODAY]
+            elsif
                 # Converts 'today' into a date formatted as such, 'YYYY-MM-DD'.
                 @formatted_date_input = self.api_call.today
                 self.api_call.date_desired = @formatted_date_input
@@ -103,14 +110,58 @@ class CLI
             date_choice
 
         elsif date_input == "exit"
+            puts "\n"
             goodbye
+            exit
         
         else
             puts "\n"
             date_choice
         end
+
         self.api_call.assign_data
         display_data
+    end
+
+
+    def more_data
+        # Once desired data is displayed, user is prompted if they would like to see a different day's data or choose a new symbol.
+        puts "Would you like to see data for #{self.api_call.company.symbol} from a different day?".colorize(:light_blue)
+        puts "Enter 'yes' or 'no':".colorize(:red)
+        y_n_input = gets.strip.downcase
+
+        if y_n_input == "y" || y_n_input == "yes"
+            if self.api_call.date.day_today != "Saturday" && self.api_call.date.day_today != "Sunday" && self.api_call.date.day_today != "Monday"
+                puts "Would you like to see #{self.api_call.company.symbol} data from today, yesterday, or another trading day?"
+                puts "Make sure it's a trading day!".colorize(:red)
+                puts "Enter 'today', 'yesterday', or enter a date in this format 'YYYY-MM-DD':"
+                date_input = gets.strip.downcase
+            elsif self.api_call.date.day_today == "Monday"
+                puts "Would you like to see #{self.api_call.company.symbol} data from today or another trading day?"
+                puts "Make sure it's a trading day!".colorize(:red)
+                puts "Enter 'today' or enter a date in this format 'YYYY-MM-DD':"
+                date_input = gets.strip.downcase
+            elsif self.api_call.date.day_today == "Saturday" || self.api_call.date.day_today == "Sunday"
+                puts "Today isn't a trading day!".colorize(:red)
+                puts "Please enter a valid trading day:"
+                date_input = gets.strip.downcase
+            end
+            self.api_call.date_desired = date_input
+            self.api_call.assign_data
+            display_data
+
+        elsif y_n_input == "n" || y_n_input == "no" || y_n_input == "main"
+            welcome
+        
+        elsif y_n_input == "exit"
+            puts "\n"
+            goodbye
+
+        else
+            puts "Invalid input.".colorize(:red)
+            puts "Please enter 'yes' or 'no':"
+        end
+
     end
 
 
