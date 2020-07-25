@@ -40,7 +40,6 @@ class AlphaVantage
         @yesterday = Date.today.prev_day.strftime
         @date = Date.new
         @company = Company.new
-        # binding.pry
     end
     
 

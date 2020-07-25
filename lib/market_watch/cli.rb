@@ -30,7 +30,7 @@ class CLI
         @symbol_input = gets.strip.upcase
 
         puts "\n"
-        puts "You may enter 'main' to access the main menu and 'exit' at any time to exit the program.".colorize(:red)
+        puts "You may enter 'main' to access the main menu and 'exit' at any time to exit the program.".colorize(:yellow)
         puts "\n"
 
         if @symbol_input == "EXIT"
@@ -58,12 +58,16 @@ class CLI
             puts "Make sure it's a trading day!".colorize(:red)
             puts "Enter 'today' or enter a date in this format 'YYYY-MM-DD':"
             date_input = gets.strip.downcase
-        elsif self.api_call.date.day_today == "Saturday" || self.api_call.date.day_today == "Sunday"
+        elsif self.api_call.date.day_today == "Saturday"
             puts "Today isn't a trading day!".colorize(:red)
-            puts "Please enter a valid trading day:"
+            puts "Enter 'yesterday' or enter a date in this format 'YYYY-MM-DD':"
+            date_input = gets.strip.downcase
+        elsif self.api_call.date.day_today == "Saturday"
+            puts "Today isn't a trading day!".colorize(:red)
+            puts "Enter a date in this format 'YYYY-MM-DD':"
             date_input = gets.strip.downcase
         end
-
+        
         if date_input == "today"
             puts "\n"
             
@@ -83,6 +87,7 @@ class CLI
                         # puts self.alpha.params["Time Series (Daily)"][AlphaVantage::DATE_YESTERDAY]
                     @formatted_date_input = self.api_call.yesterday
                     self.api_call.date_desired = @formatted_date_input
+                    date_choice
                 end
 
             elsif
@@ -121,6 +126,7 @@ class CLI
 
         self.api_call.assign_data
         display_data
+
     end
 
 
