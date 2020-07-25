@@ -49,17 +49,19 @@ class AlphaVantage
     end
 
 
+    # Formats get request to reflect user selected ticker symbol.
     def get_request
         self.class.get("function=TIME_SERIES_DAILY&#{self.symbol_format}&#{self.key}")
     end
 
 
+    # Stores JSON hash returned by API, allowing for quicker data retrieval.
     def response
-        # Unsure how to store JSON response without making new API call.
         @response ||= get_request
     end
 
 
+    # Sets instance variabes in Company class and formats data to be displayed.
     def assign_data
         self.company.symbol = @symbol
         self.company.date = @date_desired
