@@ -1,6 +1,5 @@
 require_relative "./date.rb"
 require_relative "./company.rb"
-require_relative "./display.rb"
 require_relative "./cli.rb"
 
 require 'rubygems'

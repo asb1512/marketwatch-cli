@@ -1,5 +1,5 @@
 require_relative "./alpha_vantage.rb"
-require_relative "./display.rb"
+
 
 # CLI Controller
 class CLI
@@ -47,6 +47,10 @@ class CLI
 
 
     def date_choice
+
+        puts "\n"
+        puts "Data for today is not available until market close at 4:00PM EST.".colorize(:red)
+        puts "\n"
         # Prompts user for time frame of the data.
         if self.api_call.date.day_today != "Saturday" && self.api_call.date.day_today != "Sunday" && self.api_call.date.day_today != "Monday"
             puts "Would you like to see data from today, yesterday, or another trading day?"

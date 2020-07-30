@@ -1,5 +1,4 @@
 require_relative "./alpha_vantage.rb"
-require_relative "./display.rb"
 require_relative "./cli.rb"
 
 class Company

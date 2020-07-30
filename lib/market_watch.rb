@@ -6,7 +6,6 @@ require 'bundler'
 
 require_relative "./market_watch/version"
 require_relative "./market_watch/cli"
-require_relative "./market_watch/display"
 require_relative "./market_watch/alpha_vantage"
 require_relative "./market_watch/date"
 
